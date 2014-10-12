@@ -16,7 +16,8 @@ my $builder = Module::Build->new(
     },
     requires => {
         'perl' => '5.008001',
-        'Carp' => 0,
+        'parent' => 0,
+        'Exporter' => 0,
     },
     add_to_cleanup      => [ 'Sub-Way-*' ],
     meta_merge     => {

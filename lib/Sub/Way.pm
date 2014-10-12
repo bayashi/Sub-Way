@@ -1,15 +1,46 @@
 package Sub::Way;
 use strict;
 use warnings;
-use Carp qw/croak/;
+use parent 'Exporter';
 
 our $VERSION = '0.01';
 
-sub new {
-    my $class = shift;
-    my $args  = shift || +{};
+our @EXPORT_OK = qw/ match /;
 
-    bless $args, $class;
+sub match {
+    my ($target, $cond, $and) = @_;
+
+    if ( ref($cond) eq 'ARRAY' ) {
+        if ($and) {
+            for my $c (@{$cond}) {
+                return unless _match($target, $c);
+            }
+            return 1;
+        }
+        else {
+            for my $c (@{$cond}) {
+                return 1 if _match($target, $c);
+            }
+        }
+    }
+    else {
+        return 1 if _match($target, $cond);
+    }
+
+    return; # not match
+}
+
+sub _match {
+    my ($target, $cond) = @_;
+
+    if ( !ref($cond) || ref($cond) eq 'Regexp' ) {
+        return 1 if $target =~ m!$cond!;
+    }
+    elsif ( ref($cond) eq 'CODE' ) {
+        return 1 if $cond->($target); 
+    }
+
+    return;
 }
 
 1;
