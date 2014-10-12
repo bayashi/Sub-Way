@@ -49,17 +49,53 @@ __END__
 
 =head1 NAME
 
-Sub::Way - one line description
+Sub::Way - several ways of matching
 
 
 =head1 SYNOPSIS
 
-    use Sub::Way;
+    use Sub::Way qw/match/;
+
+    if ( match($target_text, $condition) ) {
+        # do something
+    }
 
 
 =head1 DESCRIPTION
 
-Sub::Way is
+Sub::Way is the matching utility.
+
+
+=head1 METHOD
+
+=head2 match($target, $condition, $and_opt)
+
+sevelal ways below:
+
+    match('example text', 'amp'); # true
+    match('example text', qr/amp/); # true
+    match('example text', sub { my $t = shift; return 1 if $t =~ /^amp/; }); # true
+
+    match(
+        'example text',
+        [
+            'amp',
+            qr/amp/,
+            sub { my $t = shift; return 1 if $t =~ /^amp/; },
+        ]
+    ); # of course true
+
+    match(
+        'example text',
+        [
+            'yamp', # not match
+            qr/amp/,
+            sub { my $t = shift; return 1 if $t =~ /^amp/; },
+        ],
+        1,
+    ); # false
+
+By default, the array of condition is evaluated as 'OR'.
 
 
 =head1 REPOSITORY
@@ -72,11 +108,6 @@ Welcome your patches and issues :D
 =head1 AUTHOR
 
 Dai Okabayashi E<lt>bayashi@cpan.orgE<gt>
-
-
-=head1 SEE ALSO
-
-L<Other::Module>
 
 
 =head1 LICENSE
