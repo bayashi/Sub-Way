@@ -105,6 +105,11 @@ Sub::Way is hosted on github: L<http://github.com/bayashi/Sub-Way>
 Welcome your patches and issues :D
 
 
+=head1 SEE ALSO
+
+L<Smart::Match>, L<match::simple>
+
+
 =head1 AUTHOR
 
 Dai Okabayashi E<lt>bayashi@cpan.orgE<gt>
