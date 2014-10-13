@@ -35,7 +35,7 @@
    "provides" : {
       "Sub::Way" : {
          "file" : "lib/Sub/Way.pm",
-         "version" : "0.01"
+         "version" : "0.02"
       }
    },
    "release_status" : "stable",
@@ -50,5 +50,5 @@
          "url" : "http://github.com/bayashi/Sub-Way"
       }
    },
-   "version" : "0.01"
+   "version" : "0.02"
 }
